@@ -31,10 +31,14 @@ func TestTerraformEc2PowerUser(t *testing.T) {
 	}
 	fmt.Println("expected : ", expectedjsondec)
 
-	sess, err := session.NewSession(&aws.Config{
-		Region: aws.String("us-east-1")},
-	)
+	//sess, err := session.NewSession(&aws.Config{
+	//	Region: aws.String("us-east-1")},
+	//)
 
+	sess, err := session.NewSession(&aws.Config{
+            Region: aws.String("us-east-1"),
+            Credentials: credentials.NewSharedCredentials("", "test-account"),
+         })
 	// Create a IAM service client.
 	svc := iam.New(sess)
 
